@@ -25,11 +25,11 @@ function isEULocale() {
   var locale = browserLocale()
   var code = locale
 
-  if (locale.includes('-')) {
+  if (locale && locale.includes('-')) {
     code = locale.split('-')[1]
   }
 
-  return !!countryCodes[code.toUpperCase()]
+  return !!countryCodes[code && code.toUpperCase()]
 }
 
 function isInEUTimezone() {
@@ -106,9 +106,9 @@ function browserTimezone() {
 }
 
 function browserLocale() {
-  if (window.navigator.languages && window.navigator.languages.length > 0) {
+  if (window.navigator && window.navigator.languages && window.navigator.languages.length > 0) {
     // Latest versions of Chrome and Firefox set this correctly
-    return navigator.languages[0]
+    return window.navigator.languages[0]
   }
 
   if (navigator.userLanguage) {
